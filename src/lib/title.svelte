@@ -40,7 +40,6 @@
         return someExist ? thes ? text.split(' ') : text.split(' ').concat(kArr) : kArr;
     }
 
-
 </script>
 
 
