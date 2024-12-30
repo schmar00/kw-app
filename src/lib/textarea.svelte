@@ -119,10 +119,9 @@
     prg = '0%';
   }
 
-  
-
 </script>
-<div>
+
+<div class="mb-2">
   <label class="block text-sm font-medium text-gray-900 dark:text-white" for="file_input">
     Upload file
     <span class="text-sm text-gray-500 dark:text-gray-300" id="file_input_help">(.txt, .csv, .tsv)</span>
@@ -133,7 +132,7 @@
     <!-- tsv not ready yet -->
     <input accept="text/csv, text/txt, text/tsv" on:change={handleFileUpload} class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
     {#if modifiedContent.length > 2}
-      <button type="button" on:click={saveFile} class="ml-6 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" disabled>download CSV file</button>
+      <button type="button" on:click={saveFile} class="ml-6 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">download CSV file</button>
     {/if}
   </div>
   <div class="">
