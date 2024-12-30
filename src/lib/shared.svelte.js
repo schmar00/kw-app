@@ -4,7 +4,9 @@ export let kwFormat = $state({
     groupedOutput: true,
     labelOutput: true,
     uriOutput: true,
-    pathOutput: false
+    pathOutput: false,
+    detailed: true,
+    specific: true
 });
 
 export function formatKeyword(label, uri){

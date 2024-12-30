@@ -3,7 +3,8 @@
   import keyword_extractor from 'keyword-extractor';
   import { distance } from 'fastest-levenshtein';
 
-  let fileContent, fileName, keywords, modifiedContent
+  let fileContent, fileName, keywords
+  let modifiedContent = '';
 
 
   // Handle file selection and reading
@@ -127,51 +128,37 @@
     <span class="text-sm text-gray-500 dark:text-gray-300" id="file_input_help">(.txt, .csv, .tsv)</span>
   </label>
 </div>
-<div class="flex items-start">
+<div class="flex justify-between">
   <div>
     <!-- tsv not ready yet -->
     <input accept="text/csv, text/txt, text/tsv" on:change={handleFileUpload} class="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
-    <!-- {#if fileContent} -->
-    <button type="button" on:click={saveFile} class="ml-6 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">download CSV file</button>
-    <!-- {/if} -->
+    {#if modifiedContent.length > 2}
+      <button type="button" on:click={saveFile} class="ml-6 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" disabled>download CSV file</button>
+    {/if}
   </div>
-  <div class="ml-36">
-    <button type="button" on:click={getKeywords} class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-lg font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-      <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-        add keywords
-      </span>
+  <div class="">
+    {#if modifiedContent == ''}
+      <button type="button" class="text-white bg-gray-400 dark:bg-gray-500 cursor-not-allowed font-medium rounded-lg text-xl px-5 py-2.5 mb-3 text-center" disabled>add keywords</button>
+    {:else}
+      <button type="button" on:click={getKeywords} class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-xl font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+          add keywords
+        </span>
       </button>
+    {/if}
   </div>
-
-
 </div>
 
-
-<!-- Text Area to Modify Content -->
-
-
-<!-- <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Text</label> -->
-<!-- <p>Cursor Position: {cursorPosition}</p> -->
-<!-- <textarea 
-bind:value={textAreaContent}
-  on:drop={handleDrop}
-  on:dragover={allowDrop}
-  on:click={handleInput} -->
 <div class="mt-4">
   <textarea bind:value={modifiedContent}  
-    id="message" rows="4" class="block p-2.5 min-h-80 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your text here...">
-  </textarea>
+    id="message" rows="4" class="block p-2.5 min-h-80 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your text here..."></textarea>
 </div>
 
-
-<div class="flex items-center mt-2 mb-2">
-
-</div>
-
-
-<div class="w-full bg-gray-200 rounded-full h-0.5 dark:bg-gray-700">
+<div class="w-full bg-gray-200 rounded-full h-0.5 dark:bg-gray-700 mt-1">
   <div class="bg-gradient-to-r to-emerald-600 from-sky-400 h-0.5 rounded-full" style="width: {prg}"></div>
 </div>
-<div class="flex justify-end mb-1">
-  <span class="text-sm font-medium text-blue-700 dark:text-white">{prg}</span>
-</div>
+{#if prg != '0%'}
+  <div class="flex justify-end mb-1">
+    <span class="text-sm font-medium text-blue-700 dark:text-white">{prg}</span>
+  </div>
+{/if}
