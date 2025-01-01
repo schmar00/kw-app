@@ -83,6 +83,7 @@
       await new Promise(resolve => setTimeout(resolve, 10)); // Wait 1 second
       
       keywords = [];
+      let kwStrings = ' ';
       let textArr1 = kwExtract(entry, false);  console.log('textArr1', textArr1);
       let textArr2 = textArr1.map((item, index, arr) => (index < arr.length - 1)?[item, arr[index + 1]].join(''):'').filter(pair => pair);  console.log('textArr2', textArr2);
       let textArr3 = textArr1.map((item, index, arr) => (index < arr.length - 2)?[item, arr[index + 1], arr[index + 2]].join(''):'').filter(triple => triple);  //console.log('textArr3', textArr3);
@@ -95,7 +96,15 @@
         for (let word of searchArr) {
           if(distance(newKw, word) <= calDist(newKw.length) && Math.abs(word.length - kw.label.length) < 4){ //e.g. thermal well
             //console.log('word: ', word, ' - newKw: ', newKw, ' - distance: ', distance(word, newKw), ' - length: ', newKw.length);
-            keywords.push(kw);
+            if (kwFormat.detailed) {
+              if (kwStrings.indexOf(' ' + kw.label.toLowerCase() + ' ') == -1) {
+                keywords.push(kw);
+              }
+            } else {
+              keywords.push(kw);
+            }
+            kwStrings += kw.label.toLowerCase() + ' ';
+            console.log(keywords, kwStrings)
           }
         }
       }
@@ -110,7 +119,7 @@
       if (kwFormat.groupedOutput){ 
         newContent += entry + '\t' +  [...new Set(keywords)].map(a => formatKeyword(a.label, a.uri)).join('') + '\n';
       } else {
-        newContent += [...new Set(keywords)].map(a => `${entry}${'\t'}${formatKeyword(a.label, a.uri)}\n`);
+        newContent += [...new Set(keywords)].map(a => `${entry}${'\t'}${formatKeyword(a.label, a.uri)}\n`).join('');
 
       }
       newContent += '——————————————————————————\n'
