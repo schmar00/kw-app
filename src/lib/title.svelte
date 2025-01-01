@@ -6,13 +6,18 @@
 	const spEndpoint = 'https://resource.geosphere.at/graphdb/repositories/WP9-TEST';
   const spFormat = 'Accept=application%2Fsparql-results%2Bjson';
 
-  const spQuery = `PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-        SELECT DISTINCT ?uri ?p ?l (STRLEN(?l) AS ?len) 
+  const spQuery = `PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        SELECT DISTINCT ?uri ?p ?l (STRLEN(?l) AS ?len)
+        (GROUP_CONCAT(DISTINCT ?t; separator=";") AS ?topic)
         FROM <https://data.geoscience.earth/ncl/geoera/keyword>
+        FROM <https://topic>
         WHERE {
         VALUES ?p {skos:prefLabel skos:altLabel}
         ?uri ?p ?l . FILTER(LANG(?l)='en') 
-        } ORDER BY DESC (?len)`;
+        OPTIONAL {?uri foaf:primaryTopic ?t}
+        } GROUP BY ?uri ?p ?l
+        ORDER BY DESC (?len)`;
 
 	onMount(() => {
     fetch(spEndpoint + '?query=' + encodeURIComponent(spQuery) + '&' + spFormat)
@@ -21,7 +26,8 @@
         label: b.l.value.toLowerCase(),
         newLabelArr: kwExtract(b.l.value, true),
         uri: b.uri.value,
-        len: b.len.value
+        len: b.len.value,
+        topic: b.topic.value
       }))))
       .then(a=>console.log(allKeywords.arr));
   });	

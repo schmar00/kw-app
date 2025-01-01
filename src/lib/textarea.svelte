@@ -84,8 +84,8 @@
       
       keywords = [];
       let kwStrings = ' ';
-      let textArr1 = kwExtract(entry, false);  console.log('textArr1', textArr1);
-      let textArr2 = textArr1.map((item, index, arr) => (index < arr.length - 1)?[item, arr[index + 1]].join(''):'').filter(pair => pair);  console.log('textArr2', textArr2);
+      let textArr1 = kwExtract(entry, false);  //console.log('textArr1', textArr1);
+      let textArr2 = textArr1.map((item, index, arr) => (index < arr.length - 1)?[item, arr[index + 1]].join(''):'').filter(pair => pair);  //console.log('textArr2', textArr2);
       let textArr3 = textArr1.map((item, index, arr) => (index < arr.length - 2)?[item, arr[index + 1], arr[index + 2]].join(''):'').filter(triple => triple);  //console.log('textArr3', textArr3);
       let textArr4 = textArr1.map((item, index, arr) => (index < arr.length - 3)?[item, arr[index + 1], arr[index + 2], arr[index + 3]].join(''):'').filter(quad => quad);  //console.log('textArr4', textArr4);
       let searchArr = [...textArr1, ...textArr2, ...textArr3, ...textArr4]; console.log('searchArr: ', searchArr);
@@ -96,15 +96,19 @@
         for (let word of searchArr) {
           if(distance(newKw, word) <= calDist(newKw.length) && Math.abs(word.length - kw.label.length) < 4){ //e.g. thermal well
             //console.log('word: ', word, ' - newKw: ', newKw, ' - distance: ', distance(word, newKw), ' - length: ', newKw.length);
-            if (kwFormat.detailed) {
+
+            if (kwFormat.specific) { //only categorized keywords
+              if (kw.topic!='') {keywords.push(kw);}
+            } else if (kwFormat.detailed) {
               if (kwStrings.indexOf(' ' + kw.label.toLowerCase() + ' ') == -1) {
                 keywords.push(kw);
+                kwStrings += kw.label.toLowerCase() + ' ';
               }
             } else {
               keywords.push(kw);
+              kwStrings += kw.label.toLowerCase() + ' ';
             }
-            kwStrings += kw.label.toLowerCase() + ' ';
-            console.log(keywords, kwStrings)
+            //console.log(keywords, kwStrings)
           }
         }
       }

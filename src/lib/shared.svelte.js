@@ -6,7 +6,8 @@ export let kwFormat = $state({
     uriOutput: true,
     pathOutput: false,
     detailed: true,
-    specific: true
+    specific: false,
+    geonames: false
 });
 
 export function formatKeyword(label, uri){
