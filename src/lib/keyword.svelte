@@ -56,14 +56,14 @@
             labelEN: b.len.value,
             uri: b.uri.value
         })))
-        console.log(kwKeywords.arr);
+        //console.log(kwKeywords.arr);
     }
 
     let searchTerm = $state('')
 
     // Handle drag start
     function handleDragStart(event) {
-        console.log(event)
+        //console.log(event)
         event.dataTransfer.setData("text", formatKeyword(event.srcElement.id.split('|')[0], event.srcElement.id.split('|')[1]));
     }
 

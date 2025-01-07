@@ -66,11 +66,11 @@
     //modifiedContent = '';
     let newContent = '';
     let filteredKeywords = allKeywords.arr.filter(a => (a.newLabelArr.length < 5 && a.len < 40)).filter(a => !problematic.includes(a.label)); 
-    console.log('filteredKeywords: ', filteredKeywords);
+    //console.log('filteredKeywords: ', filteredKeywords);
     counter = 0;
     kwCount = 0;
-
-    for (const entry of content) {
+    //console.log(content)
+    for (const entry of content.filter(a=>a!='')) {
       counter += 1;
       prg = (counter / content.length * 100).toString().split('.')[0] + '%';
       await new Promise(resolve => setTimeout(resolve, 10)); // Wait 1 second
@@ -81,7 +81,7 @@
       let textArr2 = textArr1.map((item, index, arr) => (index < arr.length - 1)?[item, arr[index + 1]].join(''):'').filter(pair => pair);  //console.log('textArr2', textArr2);
       let textArr3 = textArr1.map((item, index, arr) => (index < arr.length - 2)?[item, arr[index + 1], arr[index + 2]].join(''):'').filter(triple => triple);  //console.log('textArr3', textArr3);
       let textArr4 = textArr1.map((item, index, arr) => (index < arr.length - 3)?[item, arr[index + 1], arr[index + 2], arr[index + 3]].join(''):'').filter(quad => quad);  //console.log('textArr4', textArr4);
-      let searchArr = [...textArr1, ...textArr2, ...textArr3, ...textArr4]; console.log('searchArr: ', searchArr);
+      let searchArr = [...textArr1, ...textArr2, ...textArr3, ...textArr4]; //console.log('searchArr: ', searchArr);
 
       for (let kw of filteredKeywords) {
         let newKw = kw.newLabelArr.join('');
