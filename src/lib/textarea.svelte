@@ -17,6 +17,7 @@
     reader.onload = function(e) {
       fileContent = e.target.result; // Read the file content
       //console.log(fileContent)
+      prg = '0%';
       // @ts-ignore
       modifiedContent = fileContent; // Set modified content to be the same initially
     };
