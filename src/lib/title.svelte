@@ -49,7 +49,7 @@
 </script>
 
 
-<h2 class="mb-4 text-3xl font-thin text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent font-extrabold bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">keyword</span> assistent</h2>
+<h2 class="mb-4 text-3xl font-thin text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent font-extrabold bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">keyword</span> assistant</h2>
 <p class="text-base font-normal text-gray-500 lg:text-base dark:text-gray-400">
   For automatic keywording with the "<strong>GeoERA Keyword Thesaurus v2.2</strong>", you can load content via CSV file or insert it directly into the text field. Depending on the configuration, the keywords (in English) are appended to the text lines with numbers or URIs “tab-delimited” by clicking on “add keywords”. Keywords can also be searched for manually (on the right-hand side) and inserted into the text field using drag and drop. The result can then be saved as a CSV file (tab-delimited).
 </p>

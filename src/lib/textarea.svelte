@@ -1,5 +1,5 @@
 <script>
-  import { allKeywords, kwFormat, formatKeyword } from './shared.svelte'
+  import { allKeywords, kwFormat, formatKeyword, atx, country } from './shared.svelte'
   import keyword_extractor from 'keyword-extractor';
   import { distance } from 'fastest-levenshtein';
 
@@ -26,7 +26,7 @@
 
   // Trigger file download after modification
   function saveFile() {
-    const blob = new Blob([modifiedContent.replace(/\—/g,'').replace(/\n\n/g,'\n')], { type: "text/plain" });
+    const blob = new Blob([modifiedContent.replace(/\—|\n\n/g,'').replace(/\n\n/g,'\n')], { type: "text/plain" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = fileName; // Save with the original file name
@@ -34,16 +34,6 @@
     // Clean up URL object after download
     URL.revokeObjectURL(link.href);
   }
-
-
-  const atx = [
-    ['hydrogeol', 'hydrogeology', 'https://data.geoscience.earth/ncl/geoera/keyword/2061'],
-    ['geophys', 'geophysics', 'https://data.geoscience.earth/ncl/geoera/keyword/2066'],
-    ['geotherm', 'geothermal energy', 'https://data.geoscience.earth/ncl/geoera/keyword/787'],
-    ['seism', 'seismology', 'https://data.geoscience.earth/ncl/geoera/keyword/349'],
-    ['geochemi', 'geochemistry', 'https://data.geoscience.earth/ncl/geoera/keyword/561'],
-    ['marine geol', 'marine geology', 'https://data.geoscience.earth/ncl/geoera/keyword/2062']
-  ];
 
   // REWORK needed for spec char removal !!!
   let extractExceptions = ['well']; // critical words not to remove by keyword extractor
@@ -63,7 +53,7 @@
     return someExist ? thes ? text.split(' ') : text.split(' ').concat(kArr) : kArr;
   }
 
-  let counter 
+  let counter, kwCount 
   let prg = '0%';
 
   function calDist(l){
@@ -72,11 +62,13 @@
 
   async function getKeywords(){
     let content = modifiedContent.split('\n');
-    modifiedContent = '';
+    //modifiedContent = '';
     let newContent = '';
     let filteredKeywords = allKeywords.arr.filter(a => (a.newLabelArr.length < 5 && a.len < 40)).filter(a => !problematic.includes(a.label)); 
     console.log('filteredKeywords: ', filteredKeywords);
     counter = 0;
+    kwCount = 0;
+
     for (const entry of content) {
       counter += 1;
       prg = (counter / content.length * 100).toString().split('.')[0] + '%';
@@ -114,22 +106,29 @@
       }
 
       for (const x of atx) {
-        if (entry.indexOf(x[0]) > -1){
+        if (entry.toLowerCase().indexOf(x[0]) > -1){
           keywords.push({label:x[1], uri:x[2]});
         }
-        
+      }
+
+      if (kwFormat.geonames) {
+        for (const x of country) {
+          if (entry.toLowerCase().indexOf(x[0]) > -1){
+            keywords.push({label:x[1], uri:x[2]});
+          }
+        }
       }
 
       if (kwFormat.groupedOutput){ 
-        newContent += entry + '\t' +  [...new Set(keywords)].map(a => formatKeyword(a.label, a.uri)).join('') + '\n';
+        newContent += entry + '\n\n\t' +  [...new Set(keywords)].map(a => formatKeyword(a.label, a.uri)).join('') + '\n';
       } else {
         newContent += [...new Set(keywords)].map(a => `${entry}${'\t'}${formatKeyword(a.label, a.uri)}\n`).join('');
-
       }
-      newContent += '——————————————————————————\n'
+      newContent += '————————————————————————————————————————————————————\n'
+      kwCount += keywords.length;
     }
     modifiedContent = newContent;
-    prg = '0%';
+    prg = 'analysed ' + content.length + ' texts, avg. ' + Math.round(kwCount/(content.length==0?1:content.length)) + ' of total ' +  kwCount + ' keywords';
   }
 
 </script>
@@ -150,7 +149,7 @@
   </div>
   <div class="">
     {#if modifiedContent == ''}
-      <button type="button" class="text-white bg-gray-400 dark:bg-gray-500 cursor-not-allowed font-medium rounded-lg text-xl px-5 py-2.5 mb-3 text-center" disabled>add keywords</button>
+      <button type="button" class="dark:text-gray-500 text-white bg-gray-300 dark:bg-gray-700 cursor-not-allowed font-medium rounded-lg text-xl px-5 py-2.5 mb-3 text-center" disabled>add keywords</button>
     {:else}
       <button type="button" on:click={getKeywords} class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-xl font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
         <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -162,8 +161,8 @@
 </div>
 
 <div class="mt-4">
-  <textarea bind:value={modifiedContent}  
-    id="message" rows="4" class="block p-2.5 min-h-80 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your text here..."></textarea>
+  <textarea bind:value={modifiedContent}
+    id="message" rows="4" class="block p-2.5 min-h-96 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your text here..."></textarea>
 </div>
 
 <div class="w-full bg-gray-200 rounded-full h-0.5 dark:bg-gray-700 mt-1">
@@ -171,6 +170,6 @@
 </div>
 {#if prg != '0%'}
   <div class="flex justify-end mb-1">
-    <span class="text-sm font-medium text-blue-700 dark:text-white">{prg}</span>
+    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{prg}</span>
   </div>
 {/if}
