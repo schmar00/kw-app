@@ -62,6 +62,7 @@
   }
 
   async function getKeywords(){
+    let start = performance.now()
     let content = modifiedContent.split('\n');
     //modifiedContent = '';
     let newContent = '';
@@ -129,7 +130,7 @@
       kwCount += keywords.length;
     }
     modifiedContent = newContent;
-    prg = 'analysed ' + content.length + ' texts, avg. ' + Math.round(kwCount/(content.length==0?1:content.length)) + ' of total ' +  kwCount + ' keywords';
+    prg = 'analysed ' + content.length + ' texts, in ' + ((performance.now() - start)/1000).toFixed(2) + 's, avg. ' + Math.round(kwCount/(content.length==0?1:content.length)) + ' of total ' +  kwCount + ' keywords';
   }
 
 </script>
