@@ -87,7 +87,7 @@
         let newKw = kw.newLabelArr.join('');
         
         for (let word of searchArr) {
-          if(distance(newKw, word) <= calDist(newKw.length) && Math.abs(word.length - kw.label.length) < 4){ //e.g. thermal well
+          if(distance(newKw, word) <= calDist(newKw.length) && Math.abs(word.length - kw.label.length) < 4 && newKw[0] == word[0]){ //e.g. thermal well
             //console.log('word: ', word, ' - newKw: ', newKw, ' - distance: ', distance(word, newKw), ' - length: ', newKw.length);
 
             if (kwFormat.specific) { //only categorized keywords
