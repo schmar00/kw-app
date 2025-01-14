@@ -32,7 +32,7 @@
       .then(a=>console.log(allKeywords.arr));
   });	
 
-  const extractExceptions = ['well'];
+  const extractExceptions = ['well', 'causes'];
     function kwExtract(text, thes){
         text = text.replace(/\_|\"|\-|\.|\:|\//g,' ').toLowerCase();
         let someExist = extractExceptions.some(word => text.split(' ').includes(word));

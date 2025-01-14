@@ -42,7 +42,7 @@
   let problematic = [];
   //let problematic = ['cation', 'geology', 'information', 'containment', 'granite', 'mass wasting', 'capping', 'primary', 'polder', 'coast', 'rock', 'placer', 'atmospheric causes', 'joint', 'copper'];
   function kwExtract(text, thes){
-    text = text.replace(/\_|\"|\-|\.|\:|\'|\//g,' ').toLowerCase();
+    text = text.replace(/\_|\"|\-|\.|\:|\//g,' ').toLowerCase();
     let someExist = extractExceptions.some(word => text.split(' ').includes(word));
     let kArr = keyword_extractor.extract(text, {
       language: "english",
@@ -78,18 +78,18 @@
       
       keywords = [];
       let kwStrings = ' ';
-      let textArr1 = kwExtract(entry, false);  //console.log('textArr1', textArr1);
-      let textArr2 = textArr1.map((item, index, arr) => (index < arr.length - 1)?[item, arr[index + 1]].join(''):'').filter(pair => pair);  //console.log('textArr2', textArr2);
+      let textArr1 = kwExtract(entry, false);  console.log('textArr1', textArr1);
+      let textArr2 = textArr1.map((item, index, arr) => (index < arr.length - 1)?[item, arr[index + 1]].join(''):'').filter(pair => pair);  console.log('textArr2', textArr2);
       let textArr3 = textArr1.map((item, index, arr) => (index < arr.length - 2)?[item, arr[index + 1], arr[index + 2]].join(''):'').filter(triple => triple);  //console.log('textArr3', textArr3);
       let textArr4 = textArr1.map((item, index, arr) => (index < arr.length - 3)?[item, arr[index + 1], arr[index + 2], arr[index + 3]].join(''):'').filter(quad => quad);  //console.log('textArr4', textArr4);
-      let searchArr = [...textArr1, ...textArr2, ...textArr3, ...textArr4]; //console.log('searchArr: ', searchArr);
+      let searchArr = [...textArr1, ...textArr2, ...textArr3, ...textArr4]; console.log('searchArr: ', searchArr);
 
       for (let kw of filteredKeywords) {
         let newKw = kw.newLabelArr.join('');
         
         for (let word of searchArr) {
           if((distance(newKw, word) <= calDist(newKw.length)) && (Math.abs(word.length - kw.label.length) < 4) && (newKw[0] == word[0])){ //e.g. thermal well
-            //console.log('word: ', word, ' - newKw: ', newKw, ' - distance: ', distance(word, newKw), ' - length: ', newKw.length);
+            console.log('word: ', word, ' - newKw: ', newKw, ' - distance: ', distance(word, newKw), ' - length: ', newKw.length);
 
             if (kwFormat.specific) { //only categorized keywords
               if (kw.topic!='') {keywords.push(kw);}
