@@ -58,7 +58,7 @@
   let prg = '0%';
 
   function calDist(l){
-    return l > 12 ? 2 : l > 5 ? 1 : 0
+    return l > 17 ? 3 : l > 12 ? 2 : l > 5 ? 1 : 0
   }
 
   async function getKeywords(){
