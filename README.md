@@ -1,4 +1,4 @@
-### Summary of the Svelte Code
+### Summary
 
 This Svelte component processes a user-uploaded text file, extracts relevant keywords, and allows the user to download a modified version of the file with keyword annotations. The code includes functions for file upload, content manipulation, keyword extraction, and file download. Here's a breakdown of key parts:
 
@@ -60,9 +60,10 @@ This Svelte component processes a user-uploaded text file, extracts relevant key
 - Once processing is complete, the `modifiedContent` contains the original file content with keyword annotations.
 - The user can download this modified version with the `saveFile()` function.
 
-This component is useful for text processing, keyword extraction, and content enhancement, particularly when working with large text datasets that require keyword annotation or classification.
+This component is useful for text processing, keyword extraction, and content enhancement, particularly when working with large text datasets that require keyword annotation or classification.  
 
 
+![usage](./public/kwapp720.gif)
 
 # Svelte + Vite
 

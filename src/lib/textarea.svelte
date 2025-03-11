@@ -1,5 +1,5 @@
 <script>
-  import { allKeywords, kwFormat, formatKeyword, atx, country } from './shared.svelte'
+  import { allKeywords, kwFormat, formatKeyword, atx, country, signKw } from './shared.svelte'
   import keyword_extractor from 'keyword-extractor';
   import { distance } from 'fastest-levenshtein';
 
@@ -67,8 +67,16 @@
     //modifiedContent = '';
     let newContent = '';
     // filter out keywords with more than 4 words and more than 40 characters
-    let filteredKeywords = allKeywords.arr.filter(a => (a.newLabelArr.length < 5 && a.len < 40)).filter(a => !problematic.includes(a.label)); 
-    //console.log('filteredKeywords: ', filteredKeywords);
+    let filteredKeywords = allKeywords.arr
+      .filter(a => (a.newLabelArr.length < 5 && a.len < 40))
+      .filter(a => !problematic.includes(a.label)); 
+      //console.log('filteredKeywords: ', filteredKeywords);
+
+    if (kwFormat.significant){
+      filteredKeywords = filteredKeywords.filter(a => signKw.indexOf(a.uri.split('/')[6]) > -1);
+      //console.log('filteredKeywords: ', filteredKeywords);
+    }  
+
     counter = 0;
     kwCount = 0;
     //console.log(content)
