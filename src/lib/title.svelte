@@ -2,7 +2,7 @@
 	import { allKeywords } from './shared.svelte'
 	import { onMount } from 'svelte';
   import keyword_extractor from 'keyword-extractor';
-  import gifmovie from '../kwapp720.gif';
+  import gifmovie from '/src/kwapp720.gif';
 
 	const spEndpoint = 'https://resource.geosphere.at/graphdb/repositories/WP9-TEST';
   const spFormat = 'Accept=application%2Fsparql-results%2Bjson';
