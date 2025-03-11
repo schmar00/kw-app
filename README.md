@@ -62,9 +62,6 @@ This Svelte component processes a user-uploaded text file, extracts relevant key
 
 This component is useful for text processing, keyword extraction, and content enhancement, particularly when working with large text datasets that require keyword annotation or classification.  
 
-
-![usage](./public/kwapp720.gif)
-
 # Svelte + Vite
 
 This template should help get you started developing with Svelte in Vite.
