@@ -104,9 +104,10 @@
           if((distance(newKw, word) <= calDist(newKw.length)) && (Math.abs(word.length - kw.label.length) < 4) && (newKw[0] == word[0])){ //e.g. thermal well
             //console.log('word: ', word, ' - newKw: ', newKw, ' - distance: ', distance(word, newKw), ' - length: ', newKw.length);
 
-            if (kwFormat.specific) { //only categorized keywords
+            /* if (kwFormat.specific) { 
               if (kw.topic!='') {keywords.push(kw);}
-            } else if (kwFormat.detailed) {
+            } else */ 
+            if (kwFormat.detailed) {
               if (kwStrings.indexOf(' ' + kw.label.toLowerCase() + ' ') == -1) {
                 keywords.push(kw);
                 kwStrings += kw.label.toLowerCase() + ' ';
@@ -118,7 +119,9 @@
             //console.log(keywords, kwStrings)
           }
         }
-      } //console.log(keywords);
+      } 
+      
+      //console.log('keywords: ', keywords);
 
       // look for text slugs matching and category detection
       let kwURIs = keywords.map(a => a.uri);
@@ -147,7 +150,7 @@
             keywords.push({label:x[1], uri:x[2]});
           }
         }
-      }      
+      }    
 
       if (kwFormat.groupedOutput){ 
         newContent += entry + '\n\n\t' +  [...new Set(keywords)].map(a => formatKeyword(a.label, a.uri)).join('') + '\n';
