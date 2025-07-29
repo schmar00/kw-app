@@ -14,7 +14,7 @@ export let kwFormat = $state({
 export function formatKeyword(label, uri){
     return ` ◍ ${kwFormat.labelOutput?label:''}${kwFormat.uriOutput?(' (' + (kwFormat.pathOutput?uri:uri.split('\/').pop()) + ')'):''}`
   }
-
+// get keywords by text fragments
 export const atx = [
     ['hydrogeol', 'hydrogeology', 'https://data.geoscience.earth/ncl/geoera/keyword/2061'],
     ['geophys', 'geophysics', 'https://data.geoscience.earth/ncl/geoera/keyword/2066'],
@@ -24,6 +24,7 @@ export const atx = [
     ['marine geol', 'marine geology', 'https://data.geoscience.earth/ncl/geoera/keyword/2062'],
     ['ccus', 'CO2 storage', 'https://data.geoscience.earth/ncl/geoera/keyword/2391'],
     ['co2', 'CO2 storage', 'https://data.geoscience.earth/ncl/geoera/keyword/2391'],
+    [' ccs ', 'CO2 storage', 'https://data.geoscience.earth/ncl/geoera/keyword/2391'],
     ['gravi', 'geophysical survey', 'https://data.geoscience.earth/ncl/geoera/keyword/359'],
     ['electromagnet', 'magnetic elecromagnetic separation', 'https://data.geoscience.earth/ncl/geoera/keyword/1269'],
     ['magnet', 'geophysical survey', 'https://data.geoscience.earth/ncl/geoera/keyword/359'],
@@ -32,7 +33,35 @@ export const atx = [
     ['Geomagnetis', 'geomagnetism', 'https://data.geoscience.earth/ncl/geoera/keyword/345'],
     ['offshor', 'offshore mining', 'https://data.geoscience.earth/ncl/geoera/keyword/1250'],
     ['marine organis', 'protected marine zone', 'https://data.geoscience.earth/ncl/geoera/keyword/1612'],
-    ['coral', 'protected marine zone', 'https://data.geoscience.earth/ncl/geoera/keyword/1612']
+    ['coral', 'protected marine zone', 'https://data.geoscience.earth/ncl/geoera/keyword/1612'],
+    ['climat', 'climate change', 'https://data.geoscience.earth/ncl/geoera/keyword/1525'],
+    ['hazard', 'natural hazard', 'https://data.geoscience.earth/ncl/geoera/keyword/1365'],
+    ['geotherm', 'renewable energy', 'https://data.geoscience.earth/ncl/geoera/keyword/653'],
+    ['paleontolo', 'palaeontology', 'https://data.geoscience.earth/ncl/geoera/keyword/2071'],
+    ['palaeontolo', 'palaeontology', 'https://data.geoscience.earth/ncl/geoera/keyword/2071'],
+    ['geochem', 'geochemistry', 'https://data.geoscience.earth/ncl/geoera/keyword/561'],
+    ['seism', 'seismology', 'https://data.geoscience.earth/ncl/geoera/keyword/349'],
+    ['geophysi', ' geophysics', 'https://data.geoscience.earth/ncl/geoera/keyword/2066'],
+    ['geotechn', 'geotechnics', 'https://data.geoscience.earth/ncl/geoera/keyword/2059'],
+    ['hydro', 'hydrology', 'https://data.geoscience.earth/ncl/geoera/keyword/2079'],
+    ['soil', 'soil', 'https://data.geoscience.earth/ncl/geoera/keyword/2016'],
+    ['radon', 'Geochemistry (category)', 'https://data.geoscience.earth/ncl/geoera/keyword/426'],
+    ['hydrocarbon', 'Fossil Resources (category)', 'https://data.geoscience.earth/ncl/geoera/keyword/1306'],
+    ['geoelectrics', 'geoelectricity', 'https://data.geoscience.earth/ncl/geoera/keyword/347'],
+    ['structural framework', 'Structural Geology (category)', 'https://data.geoscience.earth/ncl/geoera/keyword/247'],
+    ['GNSS', 'remote sensing', 'https://data.geoscience.earth/ncl/geoera/keyword/2124'],
+    ['satellite', 'remote sensing', 'https://data.geoscience.earth/ncl/geoera/keyword/2124'],
+    ['InSAR', 'remote sensing', 'https://data.geoscience.earth/ncl/geoera/keyword/2124'],
+    ['Sentinel', 'remote sensing', 'https://data.geoscience.earth/ncl/geoera/keyword/2124'],
+    ['satellit', 'remote sensing', 'https://data.geoscience.earth/ncl/geoera/keyword/2124'],
+    ['Landsat', 'remote sensing', 'https://data.geoscience.earth/ncl/geoera/keyword/2124'],
+    ['seafloor', 'sea bed', 'https://data.geoscience.earth/ncl/geoera/keyword/1961'],
+    ['geoenergy', 'Geothermal Energy (category)', 'https://data.geoscience.earth/ncl/geoera/keyword/633'],
+    ['tracer', 'tracer test', 'https://data.geoscience.earth/ncl/geoera/keyword/2509'],
+    ['vadose', 'hydrogeology', 'https://data.geoscience.earth/ncl/geoera/keyword/2061'],
+    ['hydrolog', 'hydrology', 'https://data.geoscience.earth/ncl/geoera/keyword/2079'],
+    ['evapotranspiration', 'hydrology', 'https://data.geoscience.earth/ncl/geoera/keyword/2079'],
+    ['coast', 'coast', 'https://data.geoscience.earth/ncl/geoera/keyword/672']
   ];
 
 export const signKw = "1000-1001-1002-1003-1004-1005-1007-1008-1009-1010-1011-1012-1014-1015-1018-1020-1021-1022-1023-1024-1025-1026-1027-1028-103-1030-1031-1032-1033-1034-1035-1036-1037-1038-1039-1040-1041-1042-1043-1044-1045-1046-1047-1048-1049-105-1050-1051-1052-1053-1054-1055-1056-1057-1058-1059-106-1060-1061-1062-1063-1064-1065-1066-1067-1068-1069-1070-1071-1072-1073-1074-1075-1076-1077-1078-1079-1080-1081-1084-1086-1087-1088-1089-1091-1099-110-1102-1103-1104-1108-1109-111-1110-1112-1114-1117-1118-1119-112-1125-1127-113-1135-1136-1138-1142-1143-1145-1146-1148-115-1156-1158-1159-1160-1161-1162-117-1172-1178-1181-1182-1185-119-1195-1205-1207-1209-1210-1212-1213-1216-1217-1218-1220-1222-123-1233-1234-1235-1237-1238-124-1240-1241-1242-1246-125-1252-1253-1256-1258-1259-1263-1273-1274-1275-1276-1278-1280-1281-1282-1285-1286-1288-1289-129-1291-1294-1298-130-1305-131-1310-1313-1314-1315-1317-1318-1319-132-1321-1324-1327-1328-1329-133-1330-1333-134-135-1351-1352-1354-1355-1356-1357-1358-1359-1362-1364-1365-1366-1369-1370-1374-1377-1378-1379-1380-1385-1386-1387-1388-139-1390-1391-1399-140-1400-1401-1403-1404-1405-1406-1408-1409-141-1410-1413-1417-1418-1419-1420-1423-1424-1426-1429-143-1430-1432-1433-1434-1437-1440-1443-1451-1458-1460-1461-1462-147-1471-1474-1479-1480-1482-1483-1484-1486-1487-149-1490-1492-1494-1495-1496-1497-150-1500-1502-1506-1510-1512-1514-1518-1521-1522-1525-1526-1527-1528-153-1533-1534-1539-1544-1553-1554-1555-1556-1561-1572-1576-1577-1578-159-1592-160-1600-1601-1609-1615-1619-1622-1623-1624-1626-1627-1629-1634-1637-164-1642-1643-1644-1645-1646-1647-1658-1673-1675-1680-1689-1691-1692-1693-1695-1696-1697-1698-1699-17-1700-1704-1706-1707-1708-1709-171-1710-1712-1714-1715-1717-1720-1723-1725-1742-1746-1756-1758-1759-1761-177-1773-1782-1783-1784-1786-1787-18-1827-183-1837-1838-1840-1841-1849-1852-1853-1859-1860-1861-1874-1888-1889-1890-1891-1894-190-1906-191-1928-1929-193-1937-195-196-1961-1963-197-1978-1988-1997-20-2014-2015-2016-2018-2019-2020-2021-2023-2024-2025-2027-2028-2029-2031-2033-2034-2035-2037-204-2041-2044-2047-2048-2049-205-2050-2052-2053-2054-2057-2058-2059-206-2060-2061-2062-2063-2064-2065-2066-2067-2068-2069-207-2070-2071-2072-2073-2074-2076-2077-2079-2080-2081-2082-2083-2084-2085-2090-2091-2092-2093-2094-2095-2096-2097-2099-210-2101-2102-2103-2110-2111-2112-2115-2116-2117-2118-2119-2120-2122-2123-2124-2126-2127-2130-2136-2137-2139-2140-2141-2142-2143-215-2150-2156-2157-2159-216-2160-2161-2162-2163-2164-2165-2166-2167-2168-2169-217-2170-2171-2172-2173-2174-2175-2176-2177-2178-218-2180-2182-2183-2184-2185-219-2192-2193-2196-2197-2199-22-2200-2204-2205-2207-2208-2209-221-2210-2212-2213-2214-2215-2216-2217-2218-222-2229-2235-225-226-227-2273-2274-2275-228-2289-229-2290-2293-23-2309-231-2313-2314-2317-232-2323-2324-2325-233-2331-2332-2338-234-2343-2344-2347-2348-2350-2352-2363-2364-2365-2369-2370-2375-2377-2378-2379-2385-2386-2387-2389-2390-2391-2395-2396-2397-2398-2399-240-2405-2406-2407-2408-2409-2410-2412-2413-2414-2416-2417-2418-242-2421-2422-2425-2426-2427-243-2430-2433-2434-2435-2436-2437-2438-2439-244-2444-2445-2446-2447-2448-2449-2452-2455-2456-2457-2459-246-2462-2463-2465-2467-2468-247-2472-2475-248-2481-2483-2485-2486-2487-2489-249-2491-2498-25-250-2501-2502-2503-2504-2506-2507-2512-2513-2514-2515-2516-2518-2522-2524-2525-2526-2529-2531-2532-2535-2536-2537-2541-2543-2551-2554-2561-2564-2575-2576-2577-2581-2587-2588-2590-2591-2596-2597-2598-27-276-28-281-29-295-306-308-31-310-311-312-313-314-315-316-323-328-329-332-333-334-337-339-341-342-343-344-345-346-347-349-35-350-356-359-362-363-364-372-373-374-376-379-381-384-387-388-389-39-392-394-395-399-4-401-405-407-408-409-414-417-418-419-420-422-423-424-425-428-429-43-430-431-432-433-434-435-437-439-44-440-447-451-454-455-456-457-458-46-460-461-467-468-469-47-470-471-472-477-478-479-480-481-482-483-484-485-486-487-49-490-492-493-498-499-5-501-502-504-505-506-507-508-510-511-515-527-529-530-531-532-533-535-536-544-545-55-552-555-558-561-563-566-568-571-574-576-58-580-582-585-586-587-588-593-594-597-598-60-602-603-604-605-606-607-609-61-612-613-614-615-617-619-622-626-627-629-63-631-64-643-649-65-651-653-654-655-657-658-66-663-664-667-669-67-672-673-677-678-679-68-681-682-684-685-686-689-691-692-696-697-698-703-708-71-711-713-714-715-716-718-720-722-723-725-726-727-730-731-732-734-735-736-739-740-741-742-744-745-746-748-751-754-755-756-757-758-759-76-760-761-764-765-766-767-768-769-77-770-771-772-773-775-776-777-780-781-782-783-784-785-787-789-790-791-792-793-80-800-801-805-806-81-827-829-830-833-836-839-84-841-845-846-847-848-85-850-851-852-854-855-857-859-86-860-861-864-868-869-87-871-875-876-877-88-883-884-885-886-887-888-889-892-893-896-899-9-901-902-903-904-905-907-908-91-910-911-912-913-914-915-916-917-918-919-92-920-922-923-924-925-93-932-933-934-935-936-938-94-940-948-95-957-96-961-966-97-971-973-98-982-983-985-989-99-990-991-998-999";
@@ -101,7 +130,6 @@ export const country = [
   ['sloveni', 'Slovenia', 'https://sws.geonames.org/3190538'],
   ['spain', 'Spain', 'https://sws.geonames.org/2510769'],
   ['spanish', 'Spain', 'https://sws.geonames.org/2510769'],
-  ['spanish state', 'Spanish State', 'https://sws.geonames.org/2510769'],
   ['svalbard', 'Svalbard', 'https://sws.geonames.org/7521757'],
   ['sweden', 'Sweden', 'https://sws.geonames.org/2661886'],
   ['swedish', 'Sweden', 'https://sws.geonames.org/2661886'],
@@ -113,4 +141,21 @@ export const country = [
   ['united kingdom', 'United Kingdom', 'https://sws.geonames.org/2635167'],
   ['britain', 'United Kingdom', 'https://sws.geonames.org/2635167'],
   ['british', 'United Kingdom', 'https://sws.geonames.org/2635167']
+  ];
+
+export const euroscivoc = [
+  ['x', 'climatic changes', 'http://data.europa.eu/8mn/euroscivoc/e4f1674a-c71f-4cad-b99b-5461ed81d0a6'],
+  ['x', 'natural disasters', 'http://data.europa.eu/8mn/euroscivoc/ae68c142-4643-4df3-bc77-b2c15cce63de'],
+  ['x', 'fossil energy', 'http://data.europa.eu/8mn/euroscivoc/75c3d647-f4fe-4906-abfb-62aa052724b7'],
+  ['x', 'renewable energy', 'http://data.europa.eu/8mn/euroscivoc/22ea0d5d-4358-4568-8c42-c728869ba3b9'],
+  ['x', 'carbon capture engineering', 'http://data.europa.eu/8mn/euroscivoc/4a174a1e-bab0-4d76-988c-9712b5703e35'],
+  ['x', 'mining and mineral processing', 'http://data.europa.eu/8mn/euroscivoc/060a0080-34de-404c-b235-ee69daa67ada'],
+  ['x', 'palaeontology', 'http://data.europa.eu/8mn/euroscivoc/8a64da82-b46e-4940-b896-bfc79ad3f6f8'],
+  ['x', 'geochemistry', 'http://data.europa.eu/8mn/euroscivoc/4fc54e32-5c0e-4f9f-aec1-18bb20609eba'],
+  ['x', 'seismology', 'http://data.europa.eu/8mn/euroscivoc/59f6b691-53b4-4ee6-9bc2-d428584ec8b2'],
+  ['x', 'geophysics', 'http://data.europa.eu/8mn/euroscivoc/84a41eb4-356e-40a4-bc70-216beaf3d33d'],
+  ['x', 'geotechnics', 'http://data.europa.eu/8mn/euroscivoc/969ab3ad-46f6-4637-a09b-92670ed60152'],
+  ['x', 'hydrology', 'http://data.europa.eu/8mn/euroscivoc/a90b6f46-eb48-46d0-81c2-37cf667fd4a5'],
+  ['x', 'soil sciences', 'http://data.europa.eu/8mn/euroscivoc/b486d48d-b7d5-46d8-9c7a-3e921eebe3d5'],
+  ['x', 'remote sensing', 'http://data.europa.eu/8mn/euroscivoc/acfa84a9-7d59-42ba-8028-92bdad6272d1']
   ];

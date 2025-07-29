@@ -1,5 +1,5 @@
 <script>
-  import { allKeywords, kwFormat, formatKeyword, atx, country, signKw } from './shared.svelte'
+  import { allKeywords, kwFormat, formatKeyword, atx, country, euroscivoc, signKw } from './shared.svelte'
   import keyword_extractor from 'keyword-extractor';
   import { distance } from 'fastest-levenshtein';
 
@@ -74,7 +74,7 @@
 
     if (kwFormat.significant){
       filteredKeywords = filteredKeywords.filter(a => signKw.indexOf(a.uri.split('/')[6]) > -1);
-      //console.log('filteredKeywords: ', filteredKeywords);
+      console.log('filteredKeywords: ', filteredKeywords);
     }  
 
     counter = 0;
@@ -118,21 +118,36 @@
             //console.log(keywords, kwStrings)
           }
         }
-      }
+      } //console.log(keywords);
+
       // look for text slugs matching and category detection
+      let kwURIs = keywords.map(a => a.uri);
       for (const x of atx) {
-        if (entry.toLowerCase().indexOf(x[0]) > -1){
-          keywords.push({label:x[1], uri:x[2]});
+        if ((entry.toLowerCase().indexOf(x[0]) > -1) && (kwURIs.includes(x[2])== false)) {
+          let kwTopics = filteredKeywords.filter(a => a.uri == x[2]).map(b => b.topic).join(';'); 
+          keywords.push({label:x[1], uri:x[2], topic:kwTopics});
+          kwURIs.push(x[2]);
         }
       }
       // look for country names
+      let gnURIs = [];
       if (kwFormat.geonames) {
         for (const x of country) {
-          if (entry.toLowerCase().indexOf(x[0]) > -1){
+          if ((entry.toLowerCase().indexOf(x[0]) > -1) && (gnURIs.includes(x[2])== false)) {
             keywords.push({label:x[1], uri:x[2]});
+            gnURIs.push(x[2]);
           }
         }
       }
+      // add topics from euroscivoc
+      if (kwFormat.specific) {
+        let esv = keywords.map(a => a.topic).join(';');
+        for (const x of euroscivoc) {
+          if (esv.toLowerCase().indexOf(x[1]) > -1){
+            keywords.push({label:x[1], uri:x[2]});
+          }
+        }
+      }      
 
       if (kwFormat.groupedOutput){ 
         newContent += entry + '\n\n\t' +  [...new Set(keywords)].map(a => formatKeyword(a.label, a.uri)).join('') + '\n';
