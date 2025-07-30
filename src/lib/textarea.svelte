@@ -1,5 +1,5 @@
 <script>
-  import { allKeywords, kwFormat, formatKeyword, atx, country, euroscivoc, signKw } from './shared.svelte'
+  import { allKeywords, kwFormat, formatKeyword, atx, country, euroscivoc, ignoreKw } from './shared.svelte'
   import keyword_extractor from 'keyword-extractor';
   import { distance } from 'fastest-levenshtein';
 
@@ -73,7 +73,7 @@
       //console.log('filteredKeywords: ', filteredKeywords);
 
     if (kwFormat.significant){
-      filteredKeywords = filteredKeywords.filter(a => signKw.indexOf(a.uri.split('/')[6]) > -1);
+      filteredKeywords = filteredKeywords.filter(a => ignoreKw.indexOf(`-${a.uri.split('/')[6]}-`) == -1);
       console.log('filteredKeywords: ', filteredKeywords);
     }  
 
