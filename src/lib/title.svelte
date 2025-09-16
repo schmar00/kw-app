@@ -4,7 +4,7 @@
   import keyword_extractor from 'keyword-extractor';
   import gifmovie from '/src/kwapp720.gif';
 
-	const spEndpoint = 'https://resource.geosphere.at/graphdb/repositories/WP9-TEST';
+	const spEndpoint = 'https://resource.geosphere.at/graphdb/repositories/keyword';
   const spFormat = 'Accept=application%2Fsparql-results%2Bjson';
 
   const spQuery = `PREFIX foaf: <http://xmlns.com/foaf/0.1/>
