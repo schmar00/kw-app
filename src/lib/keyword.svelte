@@ -32,7 +32,7 @@
         { tag:'uk', label:'українська мова' }
     ]);
 
-    const kwEndpoint = 'https://resource.geosphere.at/graphdb/repositories/WP9-TEST';
+    const kwEndpoint = 'https://resource.geosphere.at/graphdb/repositories/keyword';
     const kwFormat = 'Accept=application%2Fsparql-results%2Bjson';
 
     const kwQuery = `PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
