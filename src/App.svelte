@@ -2,7 +2,6 @@
 // @ts-nocheck
 
   import "./app.css";
-  import Grid from 'svelte-grid-responsive';
   import Title from './lib/title.svelte';
   import KeywordStyle from "./lib/keywordStyle.svelte";
   import Keyword from './lib/keyword.svelte';
@@ -13,33 +12,13 @@
 
 </script>
 
-<Grid container gutter={12}>
-  <Grid xs={12} lg={8}><Title /></Grid>
-  <Grid xs={12} lg={4}><KeywordStyle /></Grid>
-  
-  <Grid xs={12} lg={8}><Textarea /></Grid>
-  <Grid xs={12} lg={4}><Keyword /></Grid>
-</Grid> 
+<div class="grid grid-cols-12 gap-3">
+  <div class="col-span-12 lg:col-span-8"><Title /></div>
+  <div class="col-span-12 lg:col-span-4"><KeywordStyle /></div>
 
-<!-- 
-Component props:
-Prop	    Default	Type	  Description
-
-container	false	  bool	  Defines whether the grid is a container
-gutter	  null	  number	Grid spacing in the container
-columns	  12	    number	Setting columns count in the container
-order	    null	  number	Order the columns
-xs	      null	  number	Size in extra small screen
-sm	      null	  number	Size in small screen
-md	      null	  number	Size in medium screen
-lg	      null	  number	Size in large screen
-xl	      null	  number	Size in extra large screen
-xsOffset	null	  number	Offset in extra small screen
-smOffset	null	  number	Offset in small screen
-mdOffset	null	  number	Offset in medium screen
-lgOffset	null	  number	Offset in large screen
-xlOffset	null	  number	Offset in extra large screen
- -->
+  <div class="col-span-12 lg:col-span-8"><Textarea /></div>
+  <div class="col-span-12 lg:col-span-4"><Keyword /></div>
+</div>
 
  <footer class="">
   <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
