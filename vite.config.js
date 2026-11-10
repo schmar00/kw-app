@@ -5,4 +5,12 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 export default defineConfig({
   base: "/kw-app/",
   plugins: [svelte()],
+  server: {
+    proxy: {
+      '/graphdb': {
+        target: 'https://resource.geosphere.at',
+        changeOrigin: true,
+      },
+    },
+  },
 })

@@ -32,12 +32,14 @@
         { tag:'uk', label:'українська мова' }
     ]);
 
-    const kwEndpoint = 'https://resource.geosphere.at/graphdb/repositories/keyword';
+    const kwEndpoint = import.meta.env.DEV
+        ? '/graphdb/repositories/keyword'
+        : 'https://resource.geosphere.at/graphdb/repositories/keyword';
     const kwFormat = 'Accept=application%2Fsparql-results%2Bjson';
 
     const kwQuery = `PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
             SELECT DISTINCT ?uri ?l ?len (STRLEN(?l) AS ?length)
-            FROM <https://data.geoscience.earth/ncl/geoera/keyword>
+            FROM <https://data.geoscience.earth/ncl/egdi/keyword>
             WHERE {
             VALUES ?p {skos:prefLabel skos:altLabel}
             ?uri ?p ?l; skos:prefLabel ?len . FILTER(LANG(?l)='§') FILTER(LANG(?len)='en') 

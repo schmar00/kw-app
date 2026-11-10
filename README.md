@@ -86,6 +86,10 @@ cd kw-app
 npm install  
 npm run dev  
 ```  
+
+The Vite development server proxies local `/graphdb` requests to the GeoSphere
+SPARQL endpoint, avoiding browser CORS restrictions during local development.
+Production builds continue to use the endpoint directly.
   
 in app.svelte ->  
 ```  
