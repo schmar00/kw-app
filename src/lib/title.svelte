@@ -23,6 +23,14 @@
         ORDER BY DESC (?len)`;
 
 	onMount(() => {
+    /* window.onload = function () {
+      Pulsetic.init({
+        badge_id: 1121,
+        monitor_id: 25258,
+        element_id: "pulsetic-badge"
+      });
+    }; */
+
     fetch(spEndpoint + '?query=' + encodeURIComponent(spQuery) + '&' + spFormat)
       .then(res => res.json())
       .then(a => allKeywords.arr = (a.results.bindings.map(b => ({
@@ -51,27 +59,60 @@
 
 </script>
 
+<!-- <svelte:head>
+  <script src="https://cdn.pulsetic.com/index.js" async></script>
+</svelte:head> -->
 
-<h2 class="mb-4 text-3xl font-thin text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+<div class="mb-4 ml-6 mt-4 flex w-full items-center justify-between gap-4">
+<h2 class="min-w-0 text-3xl font-thin text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+
+<!-- <svg class="inline-block align-middle mr-2" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 112" role="img" aria-labelledby="title">
+  <title id="title">Tags</title>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="112" height="112" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0f172a" flood-opacity=".3"/>
+    </filter>
+  </defs>
+  <rect x="8" y="7" width="80" height="80" rx="20" fill="url(#background)" filter="url(#shadow)"/>
+  <path
+    transform="translate(80 16) scale(-2 2)"
+    fill="#fff"
+    d="M 14.59375 4 L 14.28125 4.28125 L 3.28125 15.28125 L 2.59375 16 L 3.28125 16.71875 L 12.28125 25.71875 L 13 26.40625 L 13.71875 25.71875 L 24.71875 14.71875 L 25 14.40625 L 25 4 Z M 15.4375 6 L 23 6 L 23 13.5625 L 13 23.5625 L 5.4375 16 Z M 26 7 L 26 9 L 27 9 L 27 17.15625 L 17.5 26.59375 L 16.25 25.34375 L 14.84375 26.75 L 16.78125 28.71875 L 17.5 29.40625 L 18.1875 28.71875 L 28.71875 18.3125 L 29 18 L 29 7 Z M 20 8 C 19.449219 8 19 8.449219 19 9 C 19 9.550781 19.449219 10 20 10 C 20.550781 10 21 9.550781 21 9 C 21 8.449219 20.550781 8 20 8 Z"
+  />
+</svg> -->
+
   <span class="text-transparent font-extrabold bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
     keyword
   </span> 
   assistant
-  <span class="ml-2 inline-flex items-center rounded bg-red-600 px-2 py-0.5 text-xs font-semibold leading-none text-white align-middle">v3.0</span>
 </h2>
+  <!-- <div id="pulsetic-badge" class="mr-[80px] shrink-0"></div> -->
+</div>
 
-<div class="text-base font-normal text-gray-500 lg:text-base dark:text-gray-400">
-  For automatic keywording with the "<strong>EGDI Keyword Thesaurus v3.0</strong>", you can load content via CSV file or insert it directly into the text field. Depending on the configuration, the keywords (in English) are appended to the text lines with numbers or URIs “tab-delimited” by clicking on “add keywords”. Keywords can also be searched for manually (on the right-hand side) and inserted into the text field using drag and drop. The result can then be saved as a CSV file (tab-delimited).
-  <span class="inline-flex">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="DodgerBlue" class="size-4">
-      <path fill-rule="evenodd" d="M1 4.75C1 3.784 1.784 3 2.75 3h14.5c.966 0 1.75.784 1.75 1.75v10.515a1.75 1.75 0 0 1-1.75 1.75h-1.5c-.078 0-.155-.005-.23-.015H4.48c-.075.01-.152.015-.23.015h-1.5A1.75 1.75 0 0 1 1 15.265V4.75Zm16.5 7.385V11.01a.25.25 0 0 0-.25-.25h-1.5a.25.25 0 0 0-.25.25v1.125c0 .138.112.25.25.25h1.5a.25.25 0 0 0 .25-.25Zm0 2.005a.25.25 0 0 0-.25-.25h-1.5a.25.25 0 0 0-.25.25v1.125c0 .108.069.2.165.235h1.585a.25.25 0 0 0 .25-.25v-1.11Zm-15 1.11v-1.11a.25.25 0 0 1 .25-.25h1.5a.25.25 0 0 1 .25.25v1.125a.25.25 0 0 1-.164.235H2.75a.25.25 0 0 1-.25-.25Zm2-4.24v1.125a.25.25 0 0 1-.25.25h-1.5a.25.25 0 0 1-.25-.25V11.01a.25.25 0 0 1 .25-.25h1.5a.25.25 0 0 1 .25.25Zm13-2.005V7.88a.25.25 0 0 0-.25-.25h-1.5a.25.25 0 0 0-.25.25v1.125c0 .138.112.25.25.25h1.5a.25.25 0 0 0 .25-.25ZM4.25 7.63a.25.25 0 0 1 .25.25v1.125a.25.25 0 0 1-.25.25h-1.5a.25.25 0 0 1-.25-.25V7.88a.25.25 0 0 1 .25-.25h1.5Zm0-3.13a.25.25 0 0 1 .25.25v1.125a.25.25 0 0 1-.25.25h-1.5a.25.25 0 0 1-.25-.25V4.75a.25.25 0 0 1 .25-.25h1.5Zm11.5 1.625a.25.25 0 0 1-.25-.25V4.75a.25.25 0 0 1 .25-.25h1.5a.25.25 0 0 1 .25.25v1.125a.25.25 0 0 1-.25.25h-1.5Zm-9 3.125a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z" clip-rule="evenodd" />
-    </svg>
-    &nbsp; 
-    <details class="text-xs cursor-pointer">
-      <summary></summary>
+<div class="text-base font-normal text-gray-500 ml-6 mr-8 lg:text-base dark:text-gray-400">
+Use the "<strong>EGDI Keyword Thesaurus</strong>" to generate keywords automatically.
+You can either load data from a CSV text file or paste it directly into the text field. Depending on your settings, clicking "add keywords" will append the English keywords to each line of text, tab‑delimited by either numeric indices or URIs.
+You also have the option to search for keywords manually on the right‑hand panel and drag them into the text field. Once processing is complete, export the result as a tab‑delimited CSV file.
+ <span class="inline-flex">
+    <details class="text-blue-600 dark:text-blue-300 hover:font-extrabold cursor-pointer">
+      <summary class="relative top-[5px] inline-flex list-none items-center gap-1">
+        <span class="h-6 w-6 bg-blue-500" aria-hidden="true" style="mask: url('{import.meta.env.BASE_URL}video-clip-svgrepo-com.svg') center / contain no-repeat; -webkit-mask: url('{import.meta.env.BASE_URL}video-clip-svgrepo-com.svg') center / contain no-repeat;"></span>
+        Here’s how to
+      </summary>
       <img class="rounded-t-lg" src={gifmovie} alt="" />
     </details>
-  </span>
+  </span><br>
+  This app runs in your browser and identifies keywords through simple text matching. Depending on the available processing power, it can be used e.g. to tag all descriptions of a catalog in a single pass.
 </div>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
 
 

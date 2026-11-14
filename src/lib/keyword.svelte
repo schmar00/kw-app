@@ -3,6 +3,7 @@
     import { distance } from 'fastest-levenshtein';
     import { onMount } from 'svelte';
 
+    let { maxHeight = 0 } = $props();
     let selLang = $state({ tag:'en', label:'English' });
     let kwKeywords = $state({arr:[]});
 
@@ -46,9 +47,30 @@
             } GROUP BY ?uri ?l ?len
             ORDER BY ?length`;
 
-    onMount(
-        () => loadThes('en')
-    );
+    onMount(() => {
+        loadThes('en');
+
+        const initializePulsetic = () => {
+            if (typeof Pulsetic === 'undefined') {
+                console.error('Pulsetic script failed to load.');
+                return;
+            }
+
+            Pulsetic.init({
+                badge_id: 1121,
+                monitor_id: 25258,
+                element_id: 'pulsetic-badge'
+            });
+        };
+
+        if (document.readyState === 'complete') {
+            initializePulsetic();
+        } else {
+            window.addEventListener('load', initializePulsetic, { once: true });
+        }
+
+        return () => window.removeEventListener('load', initializePulsetic);
+    });
 
     async function loadThes(tag) {
         kwKeywords.arr = await fetch(kwEndpoint + '?query=' + encodeURIComponent(kwQuery.replace('§', tag)) + '&' + kwFormat)
@@ -72,7 +94,12 @@
 </script>
 
 
-<div class="p-2 m-1">
+<div class="mt-[-8px]">
+<h5 class="flex items-center text-xl font-bold dark:text-white">
+    <span>Keyword Thesaurus</span>
+    <!-- <span class="ml-2 inline-flex items-center rounded bg-red-400 px-2 py-0.5 text-xs font-semibold leading-none text-white align-middle">v3.0</span> -->
+    <div id="pulsetic-badge" class="ml-auto mr-2 dark:[&_.badge-container]:!text-white"></div>
+</h5>
     <div class="flex">
         <div class="w-4/5">
             <input bind:value={searchTerm} type="text" id="first_name"
@@ -82,7 +109,7 @@
         <div class="ml-4 w-1/5">
             <form class="">
             <select bind:value={selLang.tag} onchange={() => loadThes(selLang.tag)}
-                id="underline_select" class="block py-2.5 px-0 w-full text-[12px] text-gray-500 font-bold bg-transparent border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                id="underline_select" class="block py-2.5 px-0 w-full text-sm text-blue-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-blue-300 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer cursor-pointer">
                 <option selected>English (en)</option>
                 {#each lang as l}
                 <option value={l.tag}>{l.label}</option>
@@ -92,15 +119,15 @@
         </div>
     </div>
 
-    <div >
+    <div class="overflow-y-auto" style:max-height={maxHeight ? `${maxHeight - 80}px` : '100%'}>
         {#each kwKeywords.arr.filter(a => 
             (distance(searchTerm.toLowerCase(), a.label.slice(0, searchTerm.length + 1)) < 2  
             || a.label.indexOf(searchTerm.toLowerCase()) > 0 ) 
             && searchTerm.length > 2) as k}
             <button draggable="true" ondragstart={handleDragStart} id={k.labelEN + '|' + k.uri} onclick={()=>window.open(`${k.uri}`,'_blank')}
-                class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-1 py-0 me-2 mt-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-blue-600 hover:text-white focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-1 py-0 me-2 mt-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                 {k.label}
             </button>
         {/each}
     </div>
-  </div>
+</div>

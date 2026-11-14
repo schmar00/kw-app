@@ -21,10 +21,10 @@ This Svelte component processes a user-uploaded text file, extracts relevant key
    - Reads the file content using `FileReader` and sets it to `fileContent`.
    - Initializes `modifiedContent` with the same content initially.
 
-2. **`saveFile()`**:
+2. **`saveFile(format)`**:
    - Allows the user to download the modified content.
    - Removes unnecessary characters (like long dashes or extra newlines) and creates a downloadable blob with the processed content.
-   - Downloads the file with the original file name.
+   - Downloads UTF-8 content with a BOM as comma-separated CSV or tab-separated TSV, using the original file name with the selected extension (or `keywords` if no file was uploaded).
 
 3. **`kwExtract(text, thes)`**:
    - A function to extract keywords from text.
