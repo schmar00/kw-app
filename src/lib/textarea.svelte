@@ -215,7 +215,7 @@
 </script>
 
 
-<div class="flex justify-between mt-[-8px]">
+<div class="flex flex-col sm:flex-row sm:justify-between mt-[-8px]">
   <div>
     <div class="mb-2">
       <label class="block text-sm font-medium text-gray-900 dark:text-white" for="file_input">

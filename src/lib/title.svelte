@@ -93,7 +93,7 @@
   <!-- <div id="pulsetic-badge" class="mr-[80px] shrink-0"></div> -->
 </div>
 
-<div class="text-base font-normal text-gray-500 ml-6 mr-8 lg:text-base dark:text-gray-400">
+<div class="text-base font-normal text-gray-500 mx-1 min-[400px]:ml-6 min-[400px]:mr-8 lg:text-base lg:mx-8 lg:ml-8 dark:text-gray-400">
 Use the "<strong>EGDI Keyword Thesaurus</strong>" to generate keywords automatically.
 You can either load data from a CSV text file or paste it directly into the text field. Depending on your settings, clicking "add keywords" will append the English keywords to each line of text, tab‑delimited by either numeric indices or URIs.
 You also have the option to search for keywords manually on the right‑hand panel and drag them into the text field. Once processing is complete, export the result as a tab‑delimited CSV file.
