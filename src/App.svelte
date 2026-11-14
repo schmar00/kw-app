@@ -34,7 +34,8 @@
  <footer class="">
   <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-4" />
       <div class="sm:flex sm:items-center sm:justify-between">
-          <span class="text-sm text-blue-500 sm:text-center dark:text-blue-300">© {new Date().getFullYear()} 
+          <span class="text-sm text-blue-500 sm:text-center dark:text-blue-300">
+            <span class="text-gray-500 dark:text-gray-400">© {new Date().getFullYear()} </span>
             <a href="https://europe-geology.eu" class="hover:underline">EGDI</a> - 
             <a href="https://www.geosphere.at" class="hover:underline">GeoSphere Austria</a>
           </span>
