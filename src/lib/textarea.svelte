@@ -226,7 +226,7 @@
     </div>
     <!-- tsv not ready yet -->
     <div class="flex items-center">
-    <input bind:this={fileInput} accept="text/csv, text/txt, text/tsv" on:change={handleFileUpload} class="md:w-[400px] w-[200px] shrink-0 text-sm text-blue-600 hover:font-extrabold file:bg-white file:border-0 file:focus:outline-none file:font-normal file:rounded-lg file:text-sm file:px-2 file:py-1 dark:file:bg-transparent cursor-pointer bg-white dark:text-blue-300 focus:outline-none dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
+    <input bind:this={fileInput} accept=".txt,.csv,.tsv" on:change={handleFileUpload} class="md:w-[400px] w-[200px] shrink-0 text-sm text-blue-600 hover:font-extrabold file:bg-white file:border-0 file:focus:outline-none file:font-normal file:rounded-lg file:text-sm file:px-2 file:py-1 dark:file:bg-transparent cursor-pointer bg-white dark:text-blue-300 focus:outline-none dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
     {#if modifiedContent.length > 2}
       <button type="button" on:click={() => saveFile('csv')} class="shrink-0 text-blue-600 bg-white focus:outline-none hover:font-extrabold focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-800 dark:text-blue-300 dark:focus:ring-gray-700">save CSV</button>
       <button type="button" on:click={() => saveFile('tsv')} class="shrink-0 text-blue-600 bg-white focus:outline-none hover:font-extrabold focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-800 dark:text-blue-300 dark:focus:ring-gray-700">save TSV</button>
