@@ -63,7 +63,7 @@
     </div>
     <div class="ms-2 text-sm">
         <label for="significant" class="font-medium text-gray-900 dark:text-gray-300">significant terms only</label>
-        <p id="helper-checkbox-text" class="text-xs font-normal text-gray-500 dark:text-gray-300">skip generic or ambiguous keywords like "model"</p>
+        <p id="helper-checkbox-text" class="text-xs font-normal text-gray-500 dark:text-gray-300">skip generic or ambiguous keywords (~100)</p>
     </div>
 </div>
 
