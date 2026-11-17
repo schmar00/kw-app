@@ -91,9 +91,9 @@
     <!-- <span class="ml-2 inline-flex items-center rounded bg-red-400 px-2 py-0.5 text-xs font-semibold leading-none text-white align-middle">v3.0</span> -->
     {#if thesLoaded}
         <span class="ml-auto mr-2 inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-medium text-gray-600 dark:text-gray-300"
-            role="status" title="Online when more than 1000 keywords are loaded for the selected language">
-            <span class="h-2 w-2 rounded-full {kwKeywords.arr.length > 1000 ? 'bg-green-500' : 'bg-red-500'}" aria-hidden="true"></span>
-            {kwKeywords.arr.length > 1000 ? 'online' : 'offline'}
+            role="status" title="Online when more than 10 keywords are loaded for the selected language">
+            <span class="h-2 w-2 rounded-full {kwKeywords.arr.length > 10 ? 'bg-green-500' : 'bg-red-500'}" aria-hidden="true"></span>
+            {kwKeywords.arr.length > 10 ? kwKeywords.arr.length + ' keywords online' : 'offline'}
         </span>
     {/if}
 </h5>
@@ -101,13 +101,12 @@
         <div class="w-4/5">
             <input bind:value={searchTerm} type="text" id="first_name"
             class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer block w-full p-2.5 dark:placeholder-gray-400 dark:text-white"
-            placeholder="search Keyword Thesaurus .." required />
+            placeholder="search keywords in {lang.find(l => l.tag === selLang.tag)?.label ?? selLang.label} .." required />
         </div>
         <div class="ml-4 w-1/5">
             <form class="">
             <select bind:value={selLang.tag} onchange={(event) => loadThes(event.currentTarget.value)}
                 id="underline_select" class="block py-2.5 px-0 w-full text-sm text-blue-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-blue-300 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer cursor-pointer">
-                <option selected>English (en)</option>
                 {#each lang as l}
                 <option value={l.tag}>{l.label}</option>
                 {/each}
