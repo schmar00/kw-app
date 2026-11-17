@@ -90,6 +90,9 @@ npm run dev
 The Vite development server proxies local `/graphdb` requests to the GeoSphere
 SPARQL endpoint, avoiding browser CORS restrictions during local development.
 Production builds continue to use the endpoint directly.
+After loading finishes, the Keyword Thesaurus status is online when more than
+1,000 keywords are loaded for the selected language, and offline otherwise.
+It reflects the loaded data, not an independent uptime monitor.
   
 in app.svelte ->  
 ```  

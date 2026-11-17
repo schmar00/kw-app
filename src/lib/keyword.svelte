@@ -6,6 +6,8 @@
     let { maxHeight = 0 } = $props();
     let selLang = $state({ tag:'en', label:'English' });
     let kwKeywords = $state({arr:[]});
+    let thesLoaded = $state(false);
+    let latestThesRequest = 0;
 
     const lang = $state([
         { tag:'cs', label:'čeština' },
@@ -49,38 +51,27 @@
 
     onMount(() => {
         loadThes('en');
-
-        const initializePulsetic = () => {
-            if (typeof Pulsetic === 'undefined') {
-                console.error('Pulsetic script failed to load.');
-                return;
-            }
-
-            Pulsetic.init({
-                badge_id: 1121,
-                monitor_id: 25258,
-                element_id: 'pulsetic-badge'
-            });
-        };
-
-        if (document.readyState === 'complete') {
-            initializePulsetic();
-        } else {
-            window.addEventListener('load', initializePulsetic, { once: true });
-        }
-
-        return () => window.removeEventListener('load', initializePulsetic);
     });
 
     async function loadThes(tag) {
-        kwKeywords.arr = await fetch(kwEndpoint + '?query=' + encodeURIComponent(kwQuery.replace('§', tag)) + '&' + kwFormat)
-        .then(res => res.json())
-        .then(a => a.results.bindings.map(b => ({
-            label: b.l.value.toLowerCase(),
-            labelEN: b.len.value,
-            uri: b.uri.value
-        })))
-        //console.log(kwKeywords.arr);
+        const request = ++latestThesRequest;
+        thesLoaded = false;
+        kwKeywords.arr = [];
+        try {
+            const res = await fetch(kwEndpoint + '?query=' + encodeURIComponent(kwQuery.replace('§', tag)) + '&' + kwFormat);
+            if (!res.ok) throw new Error(`Thesaurus request failed: ${res.status}`);
+            const a = await res.json();
+            const keywords = a.results.bindings.map(b => ({
+                label: b.l.value.toLowerCase(),
+                labelEN: b.len.value,
+                uri: b.uri.value
+            }));
+            if (request === latestThesRequest) kwKeywords.arr = keywords;
+        } catch (error) {
+            console.error('Failed to load keyword thesaurus:', error);
+        } finally {
+            if (request === latestThesRequest) thesLoaded = true;
+        }
     }
 
     let searchTerm = $state('')
@@ -98,7 +89,13 @@
 <h5 class="flex items-center text-xl font-bold dark:text-white">
     <span>Keyword Thesaurus</span>
     <!-- <span class="ml-2 inline-flex items-center rounded bg-red-400 px-2 py-0.5 text-xs font-semibold leading-none text-white align-middle">v3.0</span> -->
-    <div id="pulsetic-badge" class="ml-auto mr-2 dark:[&_.badge-container]:!text-white"></div>
+    {#if thesLoaded}
+        <span class="ml-auto mr-2 inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-medium text-gray-600 dark:text-gray-300"
+            role="status" title="Online when more than 1000 keywords are loaded for the selected language">
+            <span class="h-2 w-2 rounded-full {kwKeywords.arr.length > 1000 ? 'bg-green-500' : 'bg-red-500'}" aria-hidden="true"></span>
+            {kwKeywords.arr.length > 1000 ? 'online' : 'offline'}
+        </span>
+    {/if}
 </h5>
     <div class="flex">
         <div class="w-4/5">
@@ -108,7 +105,7 @@
         </div>
         <div class="ml-4 w-1/5">
             <form class="">
-            <select bind:value={selLang.tag} onchange={() => loadThes(selLang.tag)}
+            <select bind:value={selLang.tag} onchange={(event) => loadThes(event.currentTarget.value)}
                 id="underline_select" class="block py-2.5 px-0 w-full text-sm text-blue-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-blue-300 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer cursor-pointer">
                 <option selected>English (en)</option>
                 {#each lang as l}

@@ -23,14 +23,6 @@
         ORDER BY DESC (?len)`;
 
 	onMount(() => {
-    /* window.onload = function () {
-      Pulsetic.init({
-        badge_id: 1121,
-        monitor_id: 25258,
-        element_id: "pulsetic-badge"
-      });
-    }; */
-
     fetch(spEndpoint + '?query=' + encodeURIComponent(spQuery) + '&' + spFormat)
       .then(res => res.json())
       .then(a => allKeywords.arr = (a.results.bindings.map(b => ({
@@ -59,9 +51,6 @@
 
 </script>
 
-<!-- <svelte:head>
-  <script src="https://cdn.pulsetic.com/index.js" async></script>
-</svelte:head> -->
 
 <div class="mb-4 ml-6 mt-4 flex w-full items-center justify-between gap-4">
 <h2 class="min-w-0 text-3xl font-thin text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
@@ -90,7 +79,6 @@
   </span> 
   assistant
 </h2>
-  <!-- <div id="pulsetic-badge" class="mr-[80px] shrink-0"></div> -->
 </div>
 
 <div class="text-base font-normal text-gray-500 mx-1 min-[400px]:ml-6 min-[400px]:mr-8 lg:text-base lg:mx-8 lg:ml-8 dark:text-gray-400">
