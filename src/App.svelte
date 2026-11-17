@@ -53,17 +53,22 @@
                   </svg>
                   <span class="sr-only">GitHub account</span>
               </a>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <a href="https://data.geoscience.earth/ncl/egdi/keyword" target="_blank" title="European Geoscience Registry" class="text-gray-500 hover:text-gray-900 dark:hover:text-white font-[1000] m-[-2px]">EGR&nbsp;&nbsp;</a>
-              <!-- <a href="https://geusgitlab.geus.dk" title="GitLab GEUS" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
-                  <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                    <g>
-                      <path fill-rule="evenodd" />
-                      <path d="M5.868 2.75L8 10h8l2.132-7.25a.4.4 0 0 1 .765-.01l3.495 10.924a.5.5 0 0 1-.173.55L12 22 1.78 14.214a.5.5 0 0 1-.172-.55L5.103 2.74a.4.4 0 0 1 .765.009z"/>
-                  </g>
+              <a href="https://data.geoscience.earth/ncl/egdi/keyword" target="_blank" title="European Geoscience Registry" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                  <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 180 180">
+                    <g transform="translate(0.000000,180.000000) scale(0.100000,-0.100000)">
+                      <path d="M790 1789 c-293 -34 -560 -224 -694 -495 -47 -96 -73 -186 -85 -298
+                      -63 -566 419 -1048 985 -985 204 22 373 101 523 243 281 269 357 692 185 1040
+                      -137 277 -401 461 -709 496 -100 11 -99 11 -205 -1z m215 -313 c168 -45 242
+                      -151 233 -334 -6 -127 -48 -196 -147 -247 -40 -20 -43 -23 -24 -29 52 -16 120
+                      -113 222 -315 55 -109 101 -204 101 -210 0 -7 -29 -11 -80 -11 l-79 0 -92 181
+                      c-149 293 -169 309 -376 309 l-113 0 0 -245 0 -245 -80 0 -80 0 0 580 0 580
+                      233 0 c161 0 247 -4 282 -14z"/>
+                      <path d="M652 1158 l3 -203 78 -3 c95 -3 203 10 248 32 51 24 82 77 87 147 6
+                      82 -4 124 -39 164 -44 50 -105 65 -256 65 l-123 0 2 -202z"/>
+                      </g>
                   </svg>
-                  <span class="sr-only">GitLab GEUS</span>
-              </a> -->
+                  <span class="sr-only">EGR</span>
+              </a>
               <!-- <a href="https://geuscloud.geus.dk/index.php" title="NextCloud GEUS" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
                   <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 193 166">
                     <g>
