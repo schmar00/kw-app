@@ -93,7 +93,7 @@
         <span class="ml-auto mr-2 inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-medium text-gray-600 dark:text-gray-300"
             role="status" title="Online when more than 10 keywords are loaded for the selected language">
             <span class="h-2 w-2 rounded-full {kwKeywords.arr.length > 10 ? 'bg-green-500' : 'bg-red-500'}" aria-hidden="true"></span>
-            {kwKeywords.arr.length > 10 ? kwKeywords.arr.length + ' keywords online' : 'offline'}
+            {kwKeywords.arr.length > 10 ? kwKeywords.arr.length + ' terms available' : 'offline'}
         </span>
     {/if}
 </h5>
