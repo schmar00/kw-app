@@ -13,7 +13,7 @@
     </div>
     <div class="ms-2 text-sm">
         <label for="checked-checkbox" class="font-medium text-gray-900 dark:text-gray-300">group keywords</label>
-        <p id="helper-checkbox-text" class="text-xs font-normal text-gray-500 dark:text-gray-300">or create new line for each keyword?</p>
+        <p id="helper-checkbox-text" class="text-xs font-normal text-gray-500 dark:text-gray-300">rather than duplicating the entire line per keyword</p>
     </div>
 </div>
 
